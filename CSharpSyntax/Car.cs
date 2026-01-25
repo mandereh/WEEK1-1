@@ -1,13 +1,14 @@
-using System.Reflection.Metadata.Ecma335;
+using Week1TestClass.CSharpSyntax.Interfaces;
 
 namespace Week1TestClass.CSharpSyntax
 {
-    public partial class Car
+    public partial class Car : SedanSUV, ICar
     {
         public string FuelType { get; set; }
         public int FuelLiter { get; set; } //Integer (Primitive data type)
         public string Model { get; set; }
-        public int Mileage { get; set; } = 0; //Integer (Primitive data type)
+        // Take the Mileage as example of encapsulation
+        private int Mileage { get; set; } = 0; //Integer (Primitive data type)
         public int DistanceTraveled { get; set; } //Integer (Primitive data type)
         public double AverageFuelConsumption { get; set; } // Double (Primitive data type)
         public string ChangeFfuel
@@ -47,6 +48,17 @@ namespace Week1TestClass.CSharpSyntax
         {
             Console.WriteLine("The car is driving.");
         }
+
+        public void Drive(string mode) // Method
+        {
+            Console.WriteLine($"The car is {mode} driving.");
+        }
+
+        public void Drive(string mode, string offset) // Method
+        {
+            Console.WriteLine($"The car is {mode} driving.");
+        }
+
 
         // public void TurnRight() // Method
         // {
@@ -92,14 +104,20 @@ namespace Week1TestClass.CSharpSyntax
                 FuelLiter = (int)newLiter; // Explicit typecasting
 
                 var mileage = DistanceTraveled + (int)AverageFuelConsumption; // Explicit typecasting
-                Mileage = (int)mileage; // Explicit typecasting
+                Mileage += (int)mileage; // Explicit typecasting
 
-                Mileage = Mileage / 0; // This will cause an exception
+                //Mileage = Mileage / 0; // This will cause an exception
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        public void SetAverageFuelConsuptionAndDistance(double averageFuelConsumption, int distanceTraveled)
+        {
+            AverageFuelConsumption = averageFuelConsumption;
+            DistanceTraveled = distanceTraveled;
         }
 
         // Aruguments and parameters aka Signature or inputs 
