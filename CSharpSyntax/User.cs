@@ -7,21 +7,24 @@ namespace Week1TestClass.CSharpSyntax
 {
     public class User
     {
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public Gender Gender { get; set; }
         public int Age { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public Occupation Occupation { get; set; }
         public Car? Car { get; set; }
+        public UserAddress? Address  { get; set; }
 
 
-        public User(Gender gender, Occupation occupation, string? firstName = null, string? lastName = null, int age = 0)
+        public User(Gender gender, Occupation occupation, string firstName, string lastName, DateTime dateOfBirth, int age = 0)
         {
             FirstName = firstName;
             LastName = lastName;
             Age = age;
             Gender = gender;
             Occupation = occupation;
+            DateOfBirth = dateOfBirth;
         }
 
         public User() {}
@@ -48,6 +51,17 @@ namespace Week1TestClass.CSharpSyntax
             return adultUsers.ToList();
         }
     }
+
+    public struct UserAddress
+    {
+        public string? Street { get; set; }
+        public string? City { get; set; }
+        public string? State { get; set; }
+        public string? ZipCode { get; set; }
+    }
+
+
+    public record UserDto(string FirstName, string LastName, DateTime dateOfBirth, int Age);
 
     public enum Gender
     {
