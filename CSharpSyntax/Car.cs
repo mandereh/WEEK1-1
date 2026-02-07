@@ -9,9 +9,21 @@ namespace Week1TestClass.CSharpSyntax
         public string Model { get; set; }
         // Take the Mileage as example of encapsulation
         private int Mileage { get; set; } = 0; //Integer (Primitive data type)
+        public int MileageOnReport
+        {
+            get
+            {
+                return Mileage;
+            }
+            private set
+            {
+                Mileage = value;
+            }
+        }
         public int DistanceTraveled { get; set; } //Integer (Primitive data type)
         public double AverageFuelConsumption { get; set; } // Double (Primitive data type)
         public CarDimensions Dimensions { get; set; } // Struct
+        public int UserId { get; set; } // Foreign key to User for storing the id of the owner
         public FuelTypes ChangeFfuel
         {
             get
@@ -24,10 +36,10 @@ namespace Week1TestClass.CSharpSyntax
             }
         }
 
-        public Car(FuelTypes fuelType, 
-                   int fuelLiter, 
-                   FuelTypes changeFfuel, 
-                   string model, 
+        public Car(FuelTypes fuelType,
+                   int fuelLiter,
+                   FuelTypes changeFfuel,
+                   string model,
                    DateTime manufactureDate,
                    CarDimensions carDimentions)
         {
@@ -38,6 +50,8 @@ namespace Week1TestClass.CSharpSyntax
             Model = model;
             Dimensions = carDimentions;
         }
+
+        public Car() {}
 
         public void Start() // Method
         {
@@ -127,6 +141,12 @@ namespace Week1TestClass.CSharpSyntax
             DistanceTraveled = distanceTraveled;
         }
 
+        public void Purchase(User user)
+        {
+            UserId = user.Id; // This is just to demonstrate the use of parameter in struct, it does not have any real functionality
+            Console.WriteLine($"The car is purchased by {user.FirstName} {user.LastName}");
+        }
+
         // Aruguments and parameters aka Signature or inputs 
 
         // Demonstrating Enums 
@@ -137,65 +157,65 @@ namespace Week1TestClass.CSharpSyntax
             Electric,
             Hybrid
         }
+    }
 
-        //Struct vs Class:
-        // - Structs are value types and are stored on the stack, while classes are reference types and are stored on the heap.
-        // - Structs do not support inheritance, while classes do.
+    //Struct vs Class:
+    // - Structs are value types and are stored on the stack, while classes are reference types and are stored on the heap.
+    // - Structs do not support inheritance, while classes do.
 
-        // Demonstrating Struct
+    // Demonstrating Struct
 
-        public struct CarDimensions
+    public struct CarDimensions
+    {
+        public double Length; // in meters
+        public double Width;  // in meters
+        public double Height; // in meters
+
+        public CarDimensions(double length, double width, double height)
         {
-            public double Length; // in meters
-            public double Width;  // in meters
-            public double Height; // in meters
+            Length = length;
+            Width = width;
+            Height = height;
+        }
 
-            public CarDimensions(double length, double width, double height)
-            {
-                Length = length;
-                Width = width;
-                Height = height;
-            }
+        public bool ActivateSystemControl(string direction)
+        {
+            throw new NotImplementedException();
+        }
 
-            public bool ActivateSystemControl(string direction)
-            {
-                throw new NotImplementedException();
-            }
+        public void CarReport(string beforeOrAfter)
+        {
+            throw new NotImplementedException();
+        }
 
-            public void CarReport(string beforeOrAfter)
-            {
-                throw new NotImplementedException();
-            }
+        public void DisplayDimensions()
+        {
+            Console.WriteLine($"Car Dimensions - Length: {Length}m, Width: {Width}m, Height: {Height}m");
+        }
 
-            public void DisplayDimensions()
-            {
-                Console.WriteLine($"Car Dimensions - Length: {Length}m, Width: {Width}m, Height: {Height}m");
-            }
+        public void Drive()
+        {
+            throw new NotImplementedException();
+        }
 
-            public void Drive()
-            {
-                throw new NotImplementedException();
-            }
+        public void Drive(string mode)
+        {
+            throw new NotImplementedException();
+        }
 
-            public void Drive(string mode)
-            {
-                throw new NotImplementedException();
-            }
+        public void SetAverageFuelConsuptionAndDistance(double averageFuelConsumption, int distanceTraveled)
+        {
+            throw new NotImplementedException();
+        }
 
-            public void SetAverageFuelConsuptionAndDistance(double averageFuelConsumption, int distanceTraveled)
-            {
-                throw new NotImplementedException();
-            }
+        public void Start()
+        {
+            throw new NotImplementedException();
+        }
 
-            public void Start()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Stop()
-            {
-                throw new NotImplementedException();
-            }
+        public void Stop()
+        {
+            throw new NotImplementedException();
         }
     }
 }

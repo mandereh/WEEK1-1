@@ -1,4 +1,6 @@
-﻿using Week1TestClass.CSharpSyntax;
+﻿using System.Data.Common;
+using Microsoft.VisualBasic;
+using Week1TestClass.CSharpSyntax;
 using Week1TestClass.ReferenceFolder;
 using static Week1TestClass.CSharpSyntax.Car;
 
@@ -21,11 +23,15 @@ internal class Program
                           new DateTime(2020, 1, 1),
                           new CarDimensions { Length = 4.5, Width = 1.8, Height = 1.4 });
 
+        // Here is a list of users
         var listOfUsers = new List<User>();
+
+        // Here is a list of cars owned by users
+        var listOfCars = new List<Car>();
 
         User user = new User();
 
-        var user1 = new User(Gender.Male, Occupation.Engineer, "Samuel1,", "Shonekan", new DateTime(2012, 1, 1), 12);
+        var user1 = new User(1, Gender.Male, Occupation.Engineer, "Samuel1,", "Shonekan", new DateTime(2012, 1, 1), 12);
 
 
         //var userRecordInstance = new UserDto("Jane", "Doe", 28);
@@ -33,17 +39,44 @@ internal class Program
         // Demonstrating Mappings 
         var transformedUser = new UserDto(user1.FirstName, user1.LastName, user1.DateOfBirth, user1.Age);
 
-        var user2 = new User(Gender.Male, Occupation.Engineer, "Samuel2,", "Shonekan", new DateTime(2013, 1, 1), 13);
-        var user3 = new User(Gender.Male, Occupation.Engineer, "Samuel3,", "Shonekan", new DateTime(2014, 1, 1), 14);
-        var user4 = new User(Gender.Male, Occupation.Engineer, "Samuel4,", "Shonekan", new DateTime(2015, 1, 1), 15);
-        var user5 = new User(Gender.Male, Occupation.Engineer, "Samuel5,", "Shonekan", new DateTime(2016, 1, 1), 17);
-        var user6 = new User(Gender.Male, Occupation.Engineer, "Joe,", "Zhonekan", new DateTime(2006, 1, 1), 19);
-        var user7 = new User(Gender.Male, Occupation.Engineer, "Ben,", "Shonekan", new DateTime(2006, 1, 2), 19);
-        var user8 = new User(Gender.Male, Occupation.Engineer, "Samuel8,", "Ahonekan", new DateTime(2006, 1, 1), 18);
-        var user9 = new User(Gender.Male, Occupation.Engineer, "Samuel9,", "Ahonekan", new DateTime(2006, 1, 1), 18);
-        var user10 = new User(Gender.Male, Occupation.Engineer, "Samue20,", "Ahonekan", new DateTime(2006, 1, 1), 18);
-        var user11 = new User(Gender.Male, Occupation.Engineer, "Samue21,", "Ahonekan", new DateTime(2006, 1, 1), 18);
+        var user2 = new User(2, Gender.Male, Occupation.Engineer, "Samuel2,", "Shonekan", new DateTime(2013, 1, 1), 13);
+        var user3 = new User(3, Gender.Male, Occupation.Engineer, "Samuel3,", "Shonekan", new DateTime(2014, 1, 1), 14);
+        var user4 = new User(4, Gender.Male, Occupation.Engineer, "Samuel4,", "Shonekan", new DateTime(2015, 1, 1), 15);
+        var user5 = new User(5, Gender.Male, Occupation.Engineer, "Samuel5,", "Shonekan", new DateTime(2016, 1, 1), 17);
+        var user6 = new User(6, Gender.Male, Occupation.Engineer, "Joe,", "Zhonekan", new DateTime(2006, 1, 1), 19);
+        var user7 = new User(7, Gender.Male, Occupation.Engineer, "Ben,", "Shonekan", new DateTime(2006, 1, 2), 19);
+        var user8 = new User(8, Gender.Male, Occupation.Engineer, "Samuel8,", "Ahonekan", new DateTime(2006, 1, 1), 18);
+        var user9 = new User(9, Gender.Male, Occupation.Engineer, "Samuel9,", "Ahonekan", new DateTime(2006, 1, 1), 18);
+        var user10 = new User(10, Gender.Male, Occupation.Engineer, "Samue20,", "Ahonekan", new DateTime(2006, 1, 1), 18);
+        var user11 = new User(11, Gender.Male, Occupation.Engineer, "Samue21,", "Ahonekan", new DateTime(2006, 1, 1), 18);
+        var user12 = new User();
+        var user13 = new User();
+        var user14 = new User();
 
+
+        var car1 = new Car(FuelTypes.Diesel, 50, FuelTypes.Petrol, "Sedan", new DateTime(2020, 1, 1), new CarDimensions { Length = 4.5, Width = 1.8, Height = 1.4 });
+        car1.Purchase(user1);
+        car1.AverageFuelConsumption = 5.5;
+        car1.DistanceTraveled = 120;
+        car1.Stop();
+
+        var car2 = new Car(FuelTypes.Electric, 0, FuelTypes.Electric, "SUV", new DateTime(2021, 1, 1), new CarDimensions { Length = 4.8, Width = 2.0, Height = 1.7 });
+        car2.Purchase(user6);
+        car2.AverageFuelConsumption = 0; // Electric cars do not consume fuel in the traditional sense
+        car2.DistanceTraveled = 150;
+        car2.Stop();
+
+        var car3 = new Car(FuelTypes.Hybrid, 20, FuelTypes.Hybrid, "Sedan", new DateTime(2022, 1, 1), new CarDimensions { Length = 4.6, Width = 1.9, Height = 1.5 });
+        car3.Purchase(user1);
+        car3.AverageFuelConsumption = 3.5; // Hybrid cars have a lower fuel consumption
+        car3.DistanceTraveled = 100;
+        car3.Stop();
+
+
+        var car4 = new Car();
+        var car5 = new Car();
+        var car6 = new Car();
+        var car7 = new Car();
         // To duplicate Alt + Shift + DownArrow
 
         listOfUsers.Add(user1);
@@ -54,6 +87,59 @@ internal class Program
         listOfUsers.Add(user6);
         listOfUsers.Add(user7);
         listOfUsers.Add(user8);
+        listOfUsers.Add(null);
+        listOfUsers.Add(null);
+        listOfUsers.Add(null);
+
+        
+
+
+        listOfCars.Add(car1);
+        listOfCars.Add(car2);
+        listOfCars.Add(car3);
+        listOfCars.Add(car4);
+        listOfCars.Add(null);   
+        listOfCars.Add(null);
+        listOfCars.Add(null);
+
+        // Admin admin = new Admin();
+        // admin.InnerJoin(listOfUsers, listOfCars);
+
+        var nonNullCars = ExtensionMethodsAKAHelpers.WhereNotNull(listOfCars);
+        var nonNullUsers = ExtensionMethodsAKAHelpers.WhereNotNull(listOfUsers);
+
+        
+
+        var innerJoinResult = Admin.InnerJoin(listOfUsers, listOfCars);
+
+        var leftJoinResult = Admin.LeftJoin(listOfUsers, listOfCars);
+
+       
+
+        Console.WriteLine("-------------------------------------------------------------\n");
+
+        foreach (var item in innerJoinResult)
+        {
+            Console.WriteLine($"Here is the result of inner join: {item}");
+        }
+        Console.WriteLine("-------------------------------------------------------------\n");
+        foreach (var item in leftJoinResult)
+        {
+            Console.WriteLine($"Here is the result of left join: {item}");
+        }
+        Console.WriteLine("-------------------------------------------------------------\n");
+
+        // foreach (var item in groupResult)
+        // {
+        //     Console.WriteLine($"Here is the result of group by: {item}");
+        // }
+
+        var groupResult = Admin.Group(listOfCars);
+
+        Console.WriteLine("-------------------------------------------------------------\n");
+
+
+
 
         var adultUsers = user.GetAdultUsers(listOfUsers);
 
@@ -65,7 +151,7 @@ internal class Program
         // UserDto record to hold projected data
 
         // Which will create a new list of UserDto records
-               // Demonstrating Ordering 
+        // Demonstrating Ordering 
 
         var orderedAdultUsers = adultUsers.OrderBy(u => u.Age).ToList();
 
@@ -73,7 +159,7 @@ internal class Program
 
         var orderedAdultUsersDesc = adultUsers.OrderByDescending(u => u.Age).ToList();
 
-        var namesRecord = orderedAdultUsers.Select(user => new UserDto(user.FirstName, user.LastName, user.DateOfBirth, user.Age )).ToList();
+        var namesRecord = orderedAdultUsers.Select(user => new UserDto(user.FirstName, user.LastName, user.DateOfBirth, user.Age)).ToList();
 
         // Demonstrating Ascending Order
 
@@ -86,12 +172,12 @@ internal class Program
         // Demonstrating Dates of Birth ordering the names of adult users
         var orderedDob = adultUsers.OrderBy(u => u.DateOfBirth).ToList();
 
-        foreach(var nameDesc in orderedDob)
+        foreach (var nameDesc in orderedDob)
         {
             Console.WriteLine($"Here is the name of adult users in descending order: {nameDesc.FirstName} {nameDesc.LastName} {nameDesc.Age}");
         }
 
-                
+
         Console.WriteLine($"Here is the number of adult users: {adultUsers.Count}, which are between the ages of 18 and above.");
 
         foreach (var name in orderedNamesAsc)

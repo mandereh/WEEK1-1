@@ -5,20 +5,22 @@ using System.Threading.Tasks;
 
 namespace Week1TestClass.CSharpSyntax
 {
-    public class User
+    public class User // If this user is called John
     {
+        public int Id {get; set;}
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Gender Gender { get; set; }
         public int Age { get; set; }
         public DateTime DateOfBirth { get; set; }
         public Occupation Occupation { get; set; }
-        public Car? Car { get; set; }
+        public List<Car>? Cars { get; set; } // Then it simply denotes that he has the capability to own multiple cars.
         public UserAddress? Address  { get; set; }
 
 
-        public User(Gender gender, Occupation occupation, string firstName, string lastName, DateTime dateOfBirth, int age = 0)
+        public User(int id, Gender gender, Occupation occupation, string firstName, string lastName, DateTime dateOfBirth, int age = 0)
         {
+            Id = id;
             FirstName = firstName;
             LastName = lastName;
             Age = age;
@@ -35,18 +37,6 @@ namespace Week1TestClass.CSharpSyntax
             var adultUsers = from user in users
                              where user.Age >= 18
                              select user;
-
-            // Demonstrating the check without LINQ
-            // List<User> adultUsersWithoutLinq = new List<User>();
-            // foreach (var user in users)
-            // {
-            //     if (user.Age >= 18)
-            //     {
-            //         adultUsersWithoutLinq.Add(user);
-            //     }
-            // }
-
-            // return adultUsersWithoutLinq;
 
             return adultUsers.ToList();
         }

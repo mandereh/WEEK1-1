@@ -118,5 +118,39 @@ namespace Week1TestClass.CSharpSyntax
         // - Filtering: Using the 'where' clause to filter elements based on a condition.   
         // - Projection: Using the 'select' clause to transform data into a new form.
 
+
+        // Join
+        // When data is split accross different collections, jjust like tables in a database.
+
+        // Types of Joins:
+        // - Inner Join: Returns only the records that have matching values in both collections.
+        // - Left Join: Returns all records from the left collection and the matched records from the right collection. If there is no match, the result is null on the right side.
+
+        // Assignment: Implement the right join and full outer join in the Admin class.
+
+        // - Right Join: Returns all records from the right collection and the matched records from the left collection. If there is no match, the result is null on the left side.
+        // - Full Outer Join: Returns all records when there is a match in either left or right collection. If there is no match, the result is null on the side that does not have a match.
+
+
+        // Grouping:
+        // - Grouping: Using the 'group by' clause to group elements based on a key.
+        // - Aggregation: Using aggregate functions (like Count, Sum, Average, etc.) to perform calculations on grouped data.
+
+        
+
+
+
+
+
+
+        // Relationships 
+
+        // One-to-One: Each record in one collection is associated with exactly one record in another collection. (e.g., User and Car)
+        // One-to-Many: A record in one collection can be associated with multiple records in another collection. (e.g., User and Orders)
+        // Many-to-Many: Records in one collection can be associated with multiple records in another collection, and vice versa. (e.g., Students and Courses)
+
+
+
+
     }
 }
