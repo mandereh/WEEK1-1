@@ -6,27 +6,57 @@ namespace Week1TestClass.CSharpSyntax
     {
         public static List<object> InnerJoin(List<User> users, List<Car> cars)
         {
-            var innerJoin  = from user in users
-                             join car in cars on user.Id equals car.UserId
-                             select new { UserName = $"{user.FirstName} {user.LastName}", CarModel = car.Model, CarFuelType = car.FuelType };
+            var innerJoin = from user in users.Where(u => u != null)
+                            join car in cars.Where(c => c != null) on user.Id equals car.UserId
+                            select new { UserName = $"{user.FirstName} {user.LastName}", CarModel = car.Model, CarFuelType = car.FuelType };
             return innerJoin.ToList<object>();
         }
 
         public static List<object> LeftJoin(List<User> users, List<Car> cars)
         {
-            var leftJoin = from user in users
-                           join car in cars on user.Id equals car.UserId into userCars
+            var leftJoin = from user in users.Where(u => u != null)
+                           join car in cars.Where(c => c != null) on user.Id equals car.UserId into userCars
                            from car in userCars.DefaultIfEmpty()
                            select new { UserName = $"{user.FirstName} {user.LastName}", CarModel = car?.Model, CarFuelType = car?.FuelType };
             return leftJoin.ToList<object>();
         }
 
         // TODO: Implement the right join and full outer join methods here
+        public static List<object> RightJoin(List<User> users, List<Car> cars)
+        {
+            var rightJoin = from car in cars
+                            where car != null
+                            join user in users.Where(u => u != null) on car.UserId equals user.Id into carUsers
+                            from user in carUsers.DefaultIfEmpty()
+                            select new { UserName = user != null ? $"{user.FirstName} {user.LastName}" : (string?)null, CarModel = car.Model, CarFuelType = (Car.FuelTypes?)car.FuelType };
+            return rightJoin.ToList<object>();
+        }
+
+        public static List<object> FullOuterJoin(List<User> users, List<Car> cars)
+        {
+            var leftJoin = from user in users
+                           where user != null
+                           join car in cars.Where(c => c != null) on user.Id equals car.UserId into userCars
+                           from car in userCars.DefaultIfEmpty()
+                           select new { UserName = $"{user.FirstName} {user.LastName}", CarModel = car?.Model, CarFuelType = car?.FuelType };
+
+            var rightJoin = from car in cars
+                            where car != null
+                            join user in users.Where(u => u != null) on car.UserId equals user.Id into carUsers
+                            from user in carUsers.DefaultIfEmpty()
+                            where user == null
+                            select new { UserName = (string?)null, CarModel = car.Model, CarFuelType = (Car.FuelTypes?)car.FuelType };
+
+            var result = new List<object>();
+            result.AddRange(leftJoin);
+            result.AddRange(rightJoin);
+            return result;
+        }
 
 
         public static List<object> Group(List<Car> cars)
         {
-            var groupResult = from car in cars
+            var groupResult = from car in cars.Where(c => c != null)
                               group car by car.UserId into g  // The g here is a grouping of cars that share the same UserId, which means they belong to the same user.
                               select new
                               {
@@ -48,7 +78,7 @@ namespace Week1TestClass.CSharpSyntax
                 {
                     Console.WriteLine($"    Car Model: {car.Model}, Fuel Type: {car.FuelType}");
                 }
-            });  
+            });
 
             return groupResult.ToList<object>();
         }

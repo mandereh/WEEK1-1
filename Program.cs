@@ -91,14 +91,14 @@ internal class Program
         listOfUsers.Add(null);
         listOfUsers.Add(null);
 
-        
+
 
 
         listOfCars.Add(car1);
         listOfCars.Add(car2);
         listOfCars.Add(car3);
         listOfCars.Add(car4);
-        listOfCars.Add(null);   
+        listOfCars.Add(null);
         listOfCars.Add(null);
         listOfCars.Add(null);
 
@@ -108,13 +108,28 @@ internal class Program
         var nonNullCars = ExtensionMethodsAKAHelpers.WhereNotNull(listOfCars);
         var nonNullUsers = ExtensionMethodsAKAHelpers.WhereNotNull(listOfUsers);
 
-        
+
 
         var innerJoinResult = Admin.InnerJoin(listOfUsers, listOfCars);
 
+        var rightJoinResult = Admin.RightJoin(listOfUsers, listOfCars);
+        var fullOuterJoinResult = Admin.FullOuterJoin(listOfUsers, listOfCars);
+        Console.WriteLine("-------------------------------------------------------------\n");
+        foreach (var item in rightJoinResult)
+        {
+            Console.WriteLine($"Here is the result of right join: {item}");
+        }
+        Console.WriteLine("-------------------------------------------------------------\n");
+
+        foreach (var item in fullOuterJoinResult)
+        {
+            Console.WriteLine($"Here is the result of full outer join: {item}");
+        }
+        Console.WriteLine("-------------------------------------------------------------\n");
+
         var leftJoinResult = Admin.LeftJoin(listOfUsers, listOfCars);
 
-       
+
 
         Console.WriteLine("-------------------------------------------------------------\n");
 
