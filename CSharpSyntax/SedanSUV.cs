@@ -1,6 +1,6 @@
 namespace Week1TestClass.CSharpSyntax
 {
-    public class SedanSUV : Submarine // A parent class or base class
+    public class SedanSUV : Submarine // A child class or derived class, whicch inherits from the Submarine class (The father)
     {
         public string OffRoadCapability { get; set; }
 

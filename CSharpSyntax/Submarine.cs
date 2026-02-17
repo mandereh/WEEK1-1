@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Week1TestClass.CSharpSyntax
 {
-    public class Submarine
+    public class Submarine // Father class or base class
     {
         public virtual void Dive()
         {

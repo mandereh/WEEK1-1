@@ -51,7 +51,7 @@ namespace Week1TestClass.CSharpSyntax
             Dimensions = carDimentions;
         }
 
-        public Car() {}
+        public Car() { }
 
         public void Start() // Method
         {
@@ -61,8 +61,11 @@ namespace Week1TestClass.CSharpSyntax
 
         public void Stop() // Method
         {
+
             Console.WriteLine("The car is stopping.");
             CalculateMileage();
+
+
         }
 
         public void Drive() // Method
@@ -119,7 +122,7 @@ namespace Week1TestClass.CSharpSyntax
 
         private void CalculateMileage()
         {
-            try
+            try // Code that might fail. There might be possible exceptions which we don not know,, yet we will like to controll or manage them.
             {
                 var newLiter = FuelLiter - AverageFuelConsumption; // Implicit typecasting
                 FuelLiter = (int)newLiter; // Explicit typecasting
@@ -127,11 +130,16 @@ namespace Week1TestClass.CSharpSyntax
                 var mileage = DistanceTraveled + (int)AverageFuelConsumption; // Explicit typecasting
                 Mileage += (int)mileage; // Explicit typecasting
 
-                //Mileage = Mileage / 0; // This will cause an exception
+                Mileage = Mileage / 0; // This will cause an exception
             }
-            catch (Exception ex)
+            catch (NullReferenceException ex) // This is how we catch the exception, and we can manage the exception in this block of code, for example, we can log the exception or return a default value.
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"An error occurred while calculating mileage: {ex.Message}");
+                //Mileage = 0; // Set mileage to a default value in case of an error
+            }
+            finally
+            {
+                Console.WriteLine("This is the finally block, it will always be executed regardless of whether an exception is thrown or not.");
             }
         }
 

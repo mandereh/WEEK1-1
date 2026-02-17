@@ -1,3 +1,4 @@
+using System.Net.WebSockets;
 using System.Xml.Schema;
 
 namespace Week1TestClass.CSharpSyntax
@@ -6,8 +7,9 @@ namespace Week1TestClass.CSharpSyntax
     {
         public static List<object> InnerJoin(List<User> users, List<Car> cars)
         {
-            var innerJoin = from user in users.Where(u => u != null)
-                            join car in cars.Where(c => c != null) on user.Id equals car.UserId
+            //var newCollection = GetHighMileageElectricCars(cars);
+            var innerJoin = from user in users
+                            join car in cars on user.Id equals car.UserId
                             select new { UserName = $"{user.FirstName} {user.LastName}", CarModel = car.Model, CarFuelType = car.FuelType };
             return innerJoin.ToList<object>();
         }
@@ -81,6 +83,27 @@ namespace Week1TestClass.CSharpSyntax
             });
 
             return groupResult.ToList<object>();
+        }
+
+        public static List<Car> BadQuery(List<Car> cars)
+        {
+            var badQueryResult = from car in cars
+                                 where car.MileageOnReport > 100000 && car.FuelType == Car.FuelTypes.Electric
+                                 select car;
+            return badQueryResult.ToList();
+        }
+
+        // Writing an optimal version of the above query using method syntax
+
+        public static List<Car> OptimalQuery(List<Car> cars)
+        {
+            var optimalQueryResult = cars.Where(car => car.MileageOnReport > 100000 && car.FuelType == Car.FuelTypes.Electric).ToList();
+            return optimalQueryResult;
+        }
+
+        public static IEnumerable<Car> GetHighMileageElectricCars(List<Car> cars)
+        {
+            return cars.Where(car => car.MileageOnReport > 100000 && car.FuelType == Car.FuelTypes.Electric);
         }
     }
 }
