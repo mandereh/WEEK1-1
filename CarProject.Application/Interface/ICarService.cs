@@ -15,6 +15,9 @@ namespace CarProject.Application.Interface
         public void Drive(string mode);
         public void Drive(string mode, string offset);
         public bool ActivateSystemControl(Car car, string direction);
-        
+        void UpdateCar(int index, UpdateCarDto updatedCarDto);
+        void UpdateCarFuel(int index, UpdateCarFuelDto dto);
+        void DeleteCar(int index);
+
     }
 }

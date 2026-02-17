@@ -164,5 +164,75 @@ namespace CarProject.Application.Implementation
                 Data = carItems
             };
         }
+
+        public void UpdateCar(int index, UpdateCarDto updatedCarDto)
+        {
+            if (index < 0 || index >= CarStore.Count)
+            {
+                throw new Exception("Car not found.");
+            }
+
+            var car = CarStore[index];
+            car.FuelType = updatedCarDto.FuelType;
+            car.FuelLiter = updatedCarDto.FuelLiter;
+            car.Model = updatedCarDto.Model;
+            car.ManufactureDate = updatedCarDto.ManufactureDate;
+            car.Dimensions = new CarDimensions(updatedCarDto.CarDimentions.Length, updatedCarDto.CarDimentions.Width, updatedCarDto.CarDimentions.Height);
+        }
+
+        public void UpdateCarFuel(int index, UpdateCarFuelDto dto)
+        {
+            if (index < 0 || index >= CarStore.Count)
+            {
+                throw new Exception("Car not found.");
+            }
+
+            CarStore[index].FuelLiter = dto.FuelLiter;
+        }
+
+        public void DeleteCar(int index)
+        {
+            if (index < 0 || index >= CarStore.Count)
+            {
+                throw new Exception("Car not found.");
+            }
+
+            CarStore.RemoveAt(index);
+        }
+
+        // public void UpdateCar(int index, CreateCarDto updatedCarDto)
+        // {
+        //     if (index < 0 || index >= CarStore.Count)
+        //     {
+        //         throw new Exception("Car not found.");
+        //     }
+
+        //     var car = CarStore[index];
+        //     car.FuelType = updatedCarDto.FuelType;
+        //     car.FuelLiter = updatedCarDto.FuelLiter;
+        //     car.Model = updatedCarDto.Model;
+        //     car.ManufactureDate = updatedCarDto.ManufactureDate;
+        //     car.Dimensions = new CarDimensions(updatedCarDto.CarDimentions.Length, updatedCarDto.CarDimentions.Width, updatedCarDto.CarDimentions.Height);
+        // }
+
+        // public void UpdateCarFuel(int index, int fuelLiter)
+        // {
+        //     if (index < 0 || index >= CarStore.Count)
+        //     {
+        //         throw new Exception("Car not found.");
+        //     }
+
+        //     CarStore[index].FuelLiter = fuelLiter;
+        // }
+
+        // public void DeleteCar(int index)
+        // {
+        //     if (index < 0 || index >= CarStore.Count)
+        //     {
+        //         throw new Exception("Car not found.");
+        //     }
+
+        //     CarStore.RemoveAt(index);
+        // }
     }
 }
